@@ -1,0 +1,16 @@
+{% extends 'events/base.html' %}
+{% block content %}
+<center>
+    {% if searched %}
+<h1>You Search For {{searched}}</h1>
+    <br/>
+    {% for vanue in vanue%}
+    <a href="{% url 'show_vanue' vanue.id %}">{{vanue}}</a><br/>
+    {% endfor %}
+    {% else %}
+    <h1>You forget to search</h1>
+    {% endif %}
+
+</center>
+
+{% endblock %}

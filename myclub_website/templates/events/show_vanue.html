@@ -1,0 +1,33 @@
+{% extends 'events/base.html' %}
+{% block content %}
+
+  <h1>{{ vanue }}</h1>
+  <br/>
+
+
+  <div class="card">
+  <div class="card-header">
+    Vanue
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{vanue}}</h5>
+      <p class="card-text">
+    <ul>
+    <li>{{ vanue.address }}</li>
+    <li>{{ vanue.zip_code }}</li>
+    <li>{{ vanue.phone }}</li>
+    <li><a href="{{vanue.web}}">{{ vanue.web }}</a></li>
+    <li>{{ vanue.email_address }}</li>
+
+   </ul>
+    <br>
+    {% if vanue.vanue_image %}
+    <img src="{{ vanue.vanue_image.url }}" width=100 height=100>
+    {% endif %}
+      </p>
+  </div>
+</div>
+
+
+
+{% endblock %}
