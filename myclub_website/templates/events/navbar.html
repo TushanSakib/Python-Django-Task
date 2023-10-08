@@ -7,20 +7,59 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'homeYM' '2022' 'March' %}">March</a>
+          <a class="nav-link" href="{% url 'homeYM' '2022' 'March' %}">Calender</a>
+        </li>
+        {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'admin_approval' %}">Admin-Approval</a>
+        </li>
+        {%  endif %}
+        {% endif %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Events
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'list_events' %}">All Events</a></li>
+            {% if user.is_authenticated %}
+            <li> <a class="dropdown-item" href="{% url 'add_event' %}">Add Events</a></li>
+            <li> <a class="dropdown-item" href="{% url 'my_events' %}">My Events</a></li>
+            {% endif %}
+            <li> <a class="dropdown-item" href="{% url 'search_events' %}">Search Events</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Venues
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'add_vanue' %}">Add Venues</a></li>
+            <li> <a class="dropdown-item" href="{% url 'list_vanue' %}">Venue List</a></li>
+          </ul>
+        </li>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Downloads
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'vanue_text' %}">Vanue Text File</a></li>
+            <li><a class="dropdown-item" href="{% url 'vanue_csv' %}">Vanue CSV File</a></li>
+            <li><a class="dropdown-item" href="{% url 'vanue_pdf' %}">Vanue_PDF_File</a></li>
+          </ul>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout_user' %}">LOGOUT</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register_user' %}">Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'list_events' %}">Events</a>
+          <a class="nav-link" href="{% url 'login_user' %}">LOGIN</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'add_event' %}">Add Events</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'add_vanue' %}">Add Venue Images</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'list_vanue' %}">List Vanue Images</a>
-        </li>
+        {% endif %}
       </ul>
       <form class="d-flex" method=POST action="{% url 'search_vanue' %}">
         {% csrf_token %}

@@ -1,11 +1,22 @@
 {% extends 'events/base.html' %}
 {% block content %}
-{% if user.is_authenticated %}
-<h1>Events</h1>
-
-{% for event in event_list %}
-{% if event.approved %}
 <div class="card">
+  <div class="card-header">
+    {% if searched %}
+You Search For {{searched}}
+      {% else %}
+      Search Events...
+      {% endif %}
+  </div>
+  <div class="card-body">
+<form class="d-flex" method=POST action="{% url 'search_events' %}">
+        {% csrf_token %}
+        <input class="form-control me-2" type="search" placeholder="Search Events" aria-label="Search" name="searched">
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
+      </form>
+  </div></div>
+    {% for event in events%}
+       <div class="card">
   <div class="card-header">
     {{event}}
   </div>
@@ -14,11 +25,9 @@
       <p class="card-text">
           <ul>
     <li>Date: {{event.event_date}}</li>
-    <li>Days Till Event: {{event.Days_till}}</li>
     <li>Venue url: {{event.vanue.web}}</li>
     <li>Manager: {{event.manager}}</li>
     <li>Description: {{event.description}}</li>
-    <li>Approved: {{event.approved}}</li>
     <li>Attendees:
     {% for user in event.attendees.all %}
     <ul>
@@ -37,10 +46,5 @@
   </div>
 </div>
 {% endif %}
-{% endif %}
-{% endfor %}
-{% else %}
-<h1>Sorry you must to  logged in to view this page... </h1>
-<a href="{% url 'login_user' %}">Login here</a>
- {% endif %}
+    {% endfor %}
 {% endblock %}

@@ -1,11 +1,18 @@
 {% extends 'events/base.html' %}
 {% block content %}
+{% if user == event.manager %}
 <h1>Update Event</h1>
+Logged In User: {{user}}
 <br/>
+Manager : {{event.manager}}
 <form action="" method="POST">
     {% csrf_token %}
 {{form.as_p}}
     <br/>
     <input type="submit" value="Update" class="btn btn-secondary">
 </form>
+{% else %}
+<h1>Access Denied</h1>
+<p>Only the event manager can update this</p>
+{% endif %}
 {% endblock %}
