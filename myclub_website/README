@@ -1,1 +1,22 @@
+# My-Club
 
+A simple my-club back-end site using only python , Django
+
+
+## Creating Project
+ For creating the project simple write in the command prompt "django-admin startproject myclub_website"
+## Creating App
+Creating a app first you have to go in the project folder so simply write "cd myclub_website"
+Then write "python mange.py startapp events"
+There are two apps "events" & "members"
+
+## Run Server
+For run the server write "python manage.py runserver"
+
+## Add Files
+Copy the files from my git then paste them 
+
+## Migration Models
+After adding the files then you need to migrate models.
+For that write in the command prompt "python manage.py makemigrations" click Enter
+After that write "python manage.py migrate"
